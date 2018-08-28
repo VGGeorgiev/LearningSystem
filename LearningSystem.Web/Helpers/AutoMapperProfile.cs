@@ -1,9 +1,9 @@
-using AutoMapper;
-using LearningSystem.Web.Dtos;
-using LearningSystem.Web.Entities;
-
 namespace LearningSystem.Web.Helpers
 {
+    using AutoMapper;
+    using LearningSystem.Core.Entities;
+    using LearningSystem.Web.Dtos;
+
     public class AutoMapperProfile : Profile
     {
         public AutoMapperProfile()

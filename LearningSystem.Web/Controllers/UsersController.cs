@@ -1,20 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
-using AutoMapper;
-using System.IdentityModel.Tokens.Jwt;
-using LearningSystem.Web.Helpers;
-using Microsoft.Extensions.Options;
-using System.Text;
-using Microsoft.IdentityModel.Tokens;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Authorization;
-using LearningSystem.Web.Services;
-using LearningSystem.Web.Dtos;
-using LearningSystem.Web.Entities;
-
-namespace LearningSystem.Web
+﻿namespace LearningSystem.Web
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IdentityModel.Tokens.Jwt;
+    using System.Security.Claims;
+    using System.Text;
+
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Options;
+    using Microsoft.IdentityModel.Tokens;
+    using Microsoft.AspNetCore.Authorization;
+
+    using AutoMapper;
+    using LearningSystem.Web.Helpers;
+    using LearningSystem.Web.Dtos;
+    using LearningSystem.Core.Services;
+    using LearningSystem.Core.Entities;
+    using LearningSystem.Common;
+
     [Authorize]
     [ApiController]
     [Route("api/[controller]")]
