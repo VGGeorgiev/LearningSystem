@@ -1,22 +1,24 @@
-using AutoMapper;
-using LearningSystem.Web.Helpers;
-using LearningSystem.Web.Services;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SpaServices.AngularCli;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace LearningSystem.Web
 {
+    using System.Text;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Authentication.JwtBearer;
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.SpaServices.AngularCli;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Logging;
+    using Microsoft.IdentityModel.Tokens;
+
+    using AutoMapper;
+    using LearningSystem.Core.Services;
+    using LearningSystem.Web.Helpers;
+    using LearningSystem.Infrastructure;
+    using Microsoft.EntityFrameworkCore;
+    using LearningSystem.Core.Repositories;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -30,15 +32,14 @@ namespace LearningSystem.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
-            services.AddDbContext<DataContext>(x => x.UseInMemoryDatabase("TestDb"));
+            services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddAutoMapper();
 
             // configure strongly typed settings objects
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
-
-
+            
             // configure jwt authentication
             var appSettings = appSettingsSection.Get<AppSettings>();
             var key = Encoding.ASCII.GetBytes(appSettings.Secret);
@@ -76,7 +77,8 @@ namespace LearningSystem.Web
             });
 
             // configure DI for application services
-            services.AddScoped<IUserService, UserService>();
+            services.AddProjectDependencies();
+            services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
