@@ -50,6 +50,18 @@ namespace LearningSystem.Infrastructure
                 .WithMany(x => x.HomeworkEvaluations)
                 .HasForeignKey(x => x.HomeworkSubmissionId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<HomeworkSubmission>()
+                .HasOne(x => x.HomeworkAssignment)
+                .WithMany(x => x.HomeworkSubmissions)
+                .HasForeignKey(x => x.HomeworkAssignmentId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<HomeworkAssignment>()
+                .HasOne(x => x.Lecture)
+                .WithMany(x => x.HomeworkAssignments)
+                .HasForeignKey(x => x.LectureId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

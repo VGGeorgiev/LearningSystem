@@ -4,9 +4,9 @@
 
     public class HomeworkSubmission : BaseEntity
     {
-        public int LectureId { get; set; }
+        public int HomeworkAssignmentId { get; set; }
 
-        public Lecture Lecture { get; set; }
+        public HomeworkAssignment HomeworkAssignment { get; set; }
 
         public int UserId { get; set; }
 

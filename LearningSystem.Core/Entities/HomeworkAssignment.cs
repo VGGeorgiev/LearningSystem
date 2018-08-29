@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace LearningSystem.Core.Entities
 {
     public class HomeworkAssignment : BaseEntity
     {
+        public string Content { get; set; }
+
         public int LectureId { get; set; }
 
         public Lecture Lecture { get; set; }
@@ -13,5 +16,7 @@ namespace LearningSystem.Core.Entities
         public User User { get; set; }
 
         public DateTime Deadline { get; set; }
+
+        public List<HomeworkSubmission> HomeworkSubmissions { get; set; }
     }
 }
