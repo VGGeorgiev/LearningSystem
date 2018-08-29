@@ -13,7 +13,7 @@
 
     using AutoMapper;
     using LearningSystem.Web.Helpers;
-    using LearningSystem.Web.Dtos;
+    using LearningSystem.Core.Dtos;
     using LearningSystem.Core.Services;
     using LearningSystem.Core.Entities;
     using LearningSystem.Common;

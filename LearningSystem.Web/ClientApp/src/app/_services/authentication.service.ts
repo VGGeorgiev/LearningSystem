@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
+import { User } from '../_models';
 
 @Injectable()
 export class AuthenticationService {
@@ -18,10 +19,22 @@ export class AuthenticationService {
 
                 return user;
             }));
+  }
+
+  logout() {
+    // remove user from local storage to log user out
+    localStorage.removeItem('currentUser');
+  }
+
+  isLoggedIn() {
+    if (localStorage.getItem('currentUser')) {
+      return true;
     }
 
-    logout() {
-        // remove user from local storage to log user out
-        localStorage.removeItem('currentUser');
-    }
+    return false;
+  }
+
+  getCurrentUser() : User {
+    return JSON.parse(localStorage.getItem('currentUser'));
+  }
 }

@@ -1,0 +1,14 @@
+<h1>{{course.name}}</h1>
+
+<ul>
+  <li *ngFor="let lecture of course.lectures">
+    {{lecture.name}} (video: {{lecture.videoUrl}})
+    <br />
+    Homework
+    <ul>
+      <li *ngFor="let homework of lecture.homeworkAssignments">
+        {{homework.content}} ({{homework.deadline}})
+      </li>
+    </ul>
+  </li>
+</ul>

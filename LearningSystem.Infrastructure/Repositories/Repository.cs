@@ -9,8 +9,8 @@
 
     public class Repository<T> : IRepository<T> where T : BaseEntity
     {
-        private readonly DataContext context;
-        private DbSet<T> entities;
+        protected readonly DataContext context;
+        protected DbSet<T> entities;
         string errorMessage = string.Empty;
 
         public Repository(DataContext context)

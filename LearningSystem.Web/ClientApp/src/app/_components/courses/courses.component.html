@@ -1,0 +1,8 @@
+<h1 style="text-align:center;">All Courses</h1>
+
+<div class="panel panel-default" *ngFor="let semester of semesters">
+  <div class="panel-heading">{{semester.name}}</div>
+  <div class="panel-body" *ngFor="let course of semester.courses">
+    <a [routerLink]="['/course', course.id]">{{course.name}}</a> ({{course.credits}} credits)
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<h1>Hello, {{ currentUser.username }}!</h1>
+
+<h2 style="text-align:center;">Available seasons</h2>
+<div class="row">
+  <div class="col-md-4" *ngFor="let season of seasons">
+    <div class="jumbotron" style="text-align: center;">
+      <h4>{{season.name}}</h4>
+      {{season.startDate | date: 'dd.MM.yyyy'}} <br />
+      Max students: {{season.studentsLimit}} <br />
+      <button [routerLink]="['/apply', season.id]" class="btn btn-success">Apply</button>
+    </div>
+  </div>
+</div>
