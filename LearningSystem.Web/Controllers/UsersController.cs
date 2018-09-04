@@ -24,15 +24,18 @@
     public class UsersController : ControllerBase
     {
         private IUserService _userService;
+        private IFeedbackService feedbackService;
         private IMapper _mapper;
         private readonly AppSettings _appSettings;
 
         public UsersController(
             IUserService userService,
+            IFeedbackService feedbackService,
             IMapper mapper,
             IOptions<AppSettings> appSettings)
         {
             _userService = userService;
+            this.feedbackService = feedbackService;
             _mapper = mapper;
             _appSettings = appSettings.Value;
         }
@@ -104,6 +107,20 @@
             var user =  _userService.GetById(id);
             var userDto = _mapper.Map<UserDto>(user);
             return Ok(userDto);
+        }
+
+        [HttpGet("get/{username}")]
+        public IActionResult GetByUsername(string username)
+        {
+            UserDto user = _userService.GetByUsername(username);
+            return Ok(user);
+        }
+
+        [HttpPost("feedback")]
+        public IActionResult InsertFeedback([FromBody]FeedbackDto feedback)
+        {
+            var feedbackDto = this.feedbackService.InsertFeedback(feedback);
+            return Ok(feedbackDto);
         }
 
         [HttpPut("{id}")]

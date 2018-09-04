@@ -20,8 +20,11 @@ namespace LearningSystem.Services
 
         public IEnumerable<SeasonDto> GetAvailableSeasons()
         {
-            var seasons = this.seasonsRepository.GetAll();
-            var availableSeasons = Mapper.Map<IEnumerable<SeasonDto>>(seasons.Where(x => x.StartDate > DateTime.Now));
+            var seasons = this.seasonsRepository
+                .Include(x => x.Applications)
+                .GetAll()
+                .Where(x => x.StartDate > DateTime.Now);
+            var availableSeasons = Mapper.Map<IEnumerable<SeasonDto>>(seasons);
             return availableSeasons;
         }
 

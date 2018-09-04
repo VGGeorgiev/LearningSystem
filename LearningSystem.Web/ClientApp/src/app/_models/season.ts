@@ -3,4 +3,5 @@ export class Season {
   name: string;
   startDate: Date;
   studentsLimit: number;
+  isUserApplied: boolean;
 }

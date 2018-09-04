@@ -10,16 +10,19 @@ namespace LearningSystem.Services
 {
     public class SemesterService : ISemesterService
     {
-        private ISemestersRepository semesterRepository;
+        private IRepository<Semester> semesterRepository;
 
-        public SemesterService(ISemestersRepository semesterRepository)
+        public SemesterService(IRepository<Semester> semesterRepository)
         {
             this.semesterRepository = semesterRepository;
         }
 
         public IEnumerable<SemesterDto> GetSemestersWithCourses()
         {
-            var semesters = this.semesterRepository.GetSemestersWithCourses();
+            var semesters = this.semesterRepository
+                .Include(x => x.CoursesInSemester)
+                .ThenInclude<CourseInSemester, Course>(x => x.Course)
+                .GetAll();
             var semestersDto = semesters.Select(x => new SemesterDto() {
                 Id = x.Id,
                 Name = x.Name,

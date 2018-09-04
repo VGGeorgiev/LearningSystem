@@ -1,5 +1,6 @@
 ﻿namespace LearningSystem.Core.Services
 {
+    using LearningSystem.Core.Dtos;
     using LearningSystem.Core.Entities;
     using System.Collections.Generic;
 
@@ -10,6 +11,8 @@
         IEnumerable<User> GetAll();
 
         User GetById(int id);
+
+        UserDto GetByUsername(string username);
 
         User Create(User user, string password);
 

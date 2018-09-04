@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthenticationService } from '../../_services';
 import { Router } from '@angular/router';
+import { User } from '../../_models';
 
 @Component({
   selector: 'app-nav-menu',
@@ -8,10 +9,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./nav-menu.component.css']
 })
 export class NavMenuComponent {
+  currentUser: User;
   isExpanded = false;
 
   constructor(private authenticationService: AuthenticationService, private router: Router) {
-
+    this.currentUser = this.authenticationService.getCurrentUser();
   }
 
   collapse() {

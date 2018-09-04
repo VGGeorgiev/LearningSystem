@@ -37,7 +37,7 @@ namespace LearningSystem.Infrastructure.Migrations
 
                     b.Property<string>("LastName");
 
-                    b.Property<DateTime>("ModifiedDate");
+                    b.Property<DateTime?>("ModifiedDate");
 
                     b.Property<int>("SeasonId");
 
@@ -62,7 +62,7 @@ namespace LearningSystem.Infrastructure.Migrations
 
                     b.Property<int>("Credits");
 
-                    b.Property<DateTime>("ModifiedDate");
+                    b.Property<DateTime?>("ModifiedDate");
 
                     b.Property<string>("Name");
 
@@ -81,7 +81,7 @@ namespace LearningSystem.Infrastructure.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<DateTime>("ModifiedDate");
+                    b.Property<DateTime?>("ModifiedDate");
 
                     b.Property<int>("SemesterId");
 
@@ -104,7 +104,7 @@ namespace LearningSystem.Infrastructure.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<DateTime>("ModifiedDate");
+                    b.Property<DateTime?>("ModifiedDate");
 
                     b.Property<short>("Rating");
 
@@ -135,7 +135,7 @@ namespace LearningSystem.Infrastructure.Migrations
 
                     b.Property<int>("LectureId");
 
-                    b.Property<DateTime>("ModifiedDate");
+                    b.Property<DateTime?>("ModifiedDate");
 
                     b.Property<int>("UserId");
 
@@ -162,7 +162,7 @@ namespace LearningSystem.Infrastructure.Migrations
 
                     b.Property<int>("HomeworkSubmissionId");
 
-                    b.Property<DateTime>("ModifiedDate");
+                    b.Property<DateTime?>("ModifiedDate");
 
                     b.Property<int>("Valuation");
 
@@ -187,7 +187,7 @@ namespace LearningSystem.Infrastructure.Migrations
 
                     b.Property<int>("HomeworkAssignmentId");
 
-                    b.Property<DateTime>("ModifiedDate");
+                    b.Property<DateTime?>("ModifiedDate");
 
                     b.Property<int>("UserId");
 
@@ -210,7 +210,9 @@ namespace LearningSystem.Infrastructure.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<DateTime>("ModifiedDate");
+                    b.Property<string>("Description");
+
+                    b.Property<DateTime?>("ModifiedDate");
 
                     b.Property<string>("Name");
 
@@ -231,7 +233,7 @@ namespace LearningSystem.Infrastructure.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<DateTime>("ModifiedDate");
+                    b.Property<DateTime?>("ModifiedDate");
 
                     b.Property<string>("Name");
 
@@ -252,7 +254,7 @@ namespace LearningSystem.Infrastructure.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<DateTime>("ModifiedDate");
+                    b.Property<DateTime?>("ModifiedDate");
 
                     b.Property<string>("Name");
 
@@ -273,7 +275,7 @@ namespace LearningSystem.Infrastructure.Migrations
 
                     b.Property<string>("LastName");
 
-                    b.Property<DateTime>("ModifiedDate");
+                    b.Property<DateTime?>("ModifiedDate");
 
                     b.Property<byte[]>("PasswordHash");
 
@@ -300,7 +302,7 @@ namespace LearningSystem.Infrastructure.Migrations
 
                     b.Property<decimal>("Grade");
 
-                    b.Property<DateTime>("ModifiedDate");
+                    b.Property<DateTime?>("ModifiedDate");
 
                     b.Property<int>("UserId");
 

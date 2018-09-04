@@ -19,7 +19,8 @@ namespace LearningSystem.Web.Controllers
         [HttpGet("get/{id}")]
         public IActionResult Get(int id)
         {
-            var course = this.courseService.GetCourse(id);
+            var userId = int.Parse(this.User.Identity.Name);
+            var course = this.courseService.GetCourse(id, userId);
             return Ok(course);
         }
     }

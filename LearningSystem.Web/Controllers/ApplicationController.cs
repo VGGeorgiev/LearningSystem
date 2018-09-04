@@ -1,9 +1,13 @@
 ﻿namespace LearningSystem.Web.Controllers
 {
+    using AutoMapper;
     using LearningSystem.Core.Dtos;
     using LearningSystem.Core.Services;
+    using LearningSystem.Web.Models;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using System.IO;
+    using System.Threading.Tasks;
 
     [Authorize]
     [ApiController]
@@ -18,9 +22,10 @@
         }
 
         [HttpPost("add")]
-        public IActionResult Post([FromBody]ApplicationDto application)
+        public async Task<IActionResult> Post([FromForm]ApplicationRequest application)
         {
-            this.applicationService.InsertApplication(application);
+            var applicationDto = Mapper.Map<ApplicationDto>(application);
+            this.applicationService.InsertApplication(applicationDto);
             return Ok();
         }
     }

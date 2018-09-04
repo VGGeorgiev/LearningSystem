@@ -20,7 +20,7 @@
 
     <div class="form-group">
       <label for="documents">Documents</label>
-      <input type="file" class="form-control" id="documents" [(ngModel)]="model.documents" name="documents">
+      <input type="file" class="form-control" id="documents" (change)="onFileChange($event)" name="documents">
     </div>
 
     <button class="btn btn-success" (ngSubmit)="onSubmit()" [disabled]="!applicationForm.form.valid">Submit</button>

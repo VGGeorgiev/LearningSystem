@@ -13,7 +13,7 @@ import { LoginComponent } from './_components/login';
 import { RegisterComponent } from './_components/register';
 import { AuthGuard } from './_guards';
 import { AlertComponent } from './_directives';
-import { AlertService, AuthenticationService, UserService, SeasonService } from './_services';
+import { AlertService, AuthenticationService, UserService, SeasonService, HomeworkService } from './_services';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { ApplyComponent } from './_components/apply/apply.component';
 import { CoursesComponent } from './_components/courses/courses.component';
@@ -22,6 +22,8 @@ import { ApplicationService } from './_services/application.service';
 import { AppliedComponent } from './_components/applied/applied.component';
 import { CourseComponent } from './_components/course/course.component';
 import { CourseService } from './_services/course.service';
+import { EvaluateComponent } from './_components/evaluate/evaluate.component';
+import { ProfileComponent } from './_components/profile/profile.component';
 
 
 @NgModule({
@@ -37,7 +39,9 @@ import { CourseService } from './_services/course.service';
     ApplyComponent,
     CoursesComponent,
     CourseComponent,
-    AppliedComponent
+    AppliedComponent,
+    EvaluateComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -54,6 +58,9 @@ import { CourseService } from './_services/course.service';
       { path: 'applied', component: AppliedComponent },
       { path: 'courses', component: CoursesComponent },
       { path: 'course/:id', component: CourseComponent },
+      { path: 'evaluate/:id', component: EvaluateComponent },
+      { path: 'profile/:username', component: ProfileComponent },
+      { path: 'profile', component: ProfileComponent },
       { path: '**', redirectTo: '' }
     ])
   ],
@@ -66,6 +73,7 @@ import { CourseService } from './_services/course.service';
     SemesterService,
     ApplicationService,
     CourseService,
+    HomeworkService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 ],

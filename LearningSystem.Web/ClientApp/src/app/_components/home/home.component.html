@@ -4,10 +4,13 @@
 <div class="row">
   <div class="col-md-4" *ngFor="let season of seasons">
     <div class="jumbotron" style="text-align: center;">
+      <div class="glyphicon glyphicon-globe" width="100px"></div>
       <h4>{{season.name}}</h4>
       {{season.startDate | date: 'dd.MM.yyyy'}} <br />
       Max students: {{season.studentsLimit}} <br />
-      <button [routerLink]="['/apply', season.id]" class="btn btn-success">Apply</button>
+      <button [routerLink]="['/apply', season.id]" class="btn btn-success" [disabled]="season.isUserApplied">Apply</button>
+      
+      <div class="text-success" *ngIf="season.isUserApplied">You already applied!</div>
     </div>
   </div>
 </div>

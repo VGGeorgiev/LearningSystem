@@ -5,5 +5,5 @@ export class Application {
   firstName: string;
   lastName: string;
   highSchoolGrade: number;
-  documents: string;
+  documents: File;
 }

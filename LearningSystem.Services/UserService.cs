@@ -3,8 +3,9 @@ namespace LearningSystem.Infrastructure.Services
     using System;
     using System.Collections.Generic;
     using System.Linq;
-
+    using AutoMapper;
     using LearningSystem.Common;
+    using LearningSystem.Core.Dtos;
     using LearningSystem.Core.Entities;
     using LearningSystem.Core.Repositories;
     using LearningSystem.Core.Services;
@@ -51,6 +52,17 @@ namespace LearningSystem.Infrastructure.Services
         public User GetById(int id)
         {
             return this.usersRepository.Get(id);
+        }
+
+        public UserDto GetByUsername(string username)
+        {
+            var user = this.usersRepository
+                .Include(x => x.Feedbacks)
+                .ThenInclude<Feedback, User>(x => x.Reporter)
+                .GetAll()
+                .FirstOrDefault(x => x.Username == username);
+            var userDto = Mapper.Map<UserDetailDto>(user);
+            return userDto;
         }
 
         public User Create(User user, string password)

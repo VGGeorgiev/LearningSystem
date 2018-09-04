@@ -11,5 +11,7 @@
         public DateTime StartDate { get; set; }
 
         public int StudentsLimit { get; set; }
+
+        public bool IsUserApplied { get; set; }
     }
 }
