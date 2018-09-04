@@ -18,6 +18,22 @@ namespace LearningSystem.Web
     using LearningSystem.Infrastructure;
     using Microsoft.EntityFrameworkCore;
     using LearningSystem.Core.Repositories;
+    using Microsoft.AspNetCore.Http;
+
+    public static class AutoMapperExtenssion
+    {
+        public static void AddAutomapperConfiguration(this IServiceCollection services, IHttpContextAccessor httpContextAccessor)
+        {
+            var automapperConfig = new MapperConfiguration(configuration =>
+            {
+                configuration.AddProfile(new AutoMapperProfile(httpContextAccessor));
+            });
+
+            var autoMapper = automapperConfig.CreateMapper();
+
+            services.AddSingleton(autoMapper);
+        }
+    }
 
     public class Startup
     {
@@ -34,7 +50,9 @@ namespace LearningSystem.Web
             services.AddCors();
             services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddAutoMapper();
+            services.AddHttpContextAccessor();
+            services.AddAutoMapper(x => x.AddProfile(new AutoMapperProfile(services.BuildServiceProvider().GetService<IHttpContextAccessor>())));
+            //services.AddAutomapperConfiguration(services.BuildServiceProvider().GetService<IHttpContextAccessor>());
 
             // configure strongly typed settings objects
             var appSettingsSection = Configuration.GetSection("AppSettings");
@@ -115,7 +133,7 @@ namespace LearningSystem.Web
                 .AllowCredentials());
 
             app.UseAuthentication();
-
+            
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
