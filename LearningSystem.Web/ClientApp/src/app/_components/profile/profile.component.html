@@ -1,0 +1,36 @@
+<h1>{{username}} Profile</h1>
+
+<dl class="row">
+  <dt class="col-sm-3">First Name</dt>
+  <dd class="col-sm-9">{{user.firstName}}</dd>
+
+  <dt class="col-sm-3">Last Name</dt>
+  <dd class="col-sm-9">{{user.lastName}}</dd>
+
+  <dt class="col-sm-3">Feedback</dt>
+  <dd class="col-sm-9">
+    <ul>
+      <li *ngFor="let feedback of user.feedbacks">{{feedback.content}} (Rating: {{feedback.rating}})</li>
+    </ul>
+  </dd>
+</dl>
+
+<div *ngIf="!isMyProfile">
+  <h2>Give feedback</h2>
+
+  <div class="container col-md-12">
+    <form (ngSubmit)="onSubmit()" #feedbackForm="ngForm">
+      <div class="form-group">
+        <label for="content">Content</label>
+        <textarea class="form-control" id="content" required [(ngModel)]="model.content" name="content"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="rating">Rating</label>
+        <input type="number" class="form-control" id="rating" required [(ngModel)]="model.rating" name="rating">
+      </div>
+
+      <button class="btn btn-success" (ngSubmit)="onSubmit()" [disabled]="!feedbackForm.form.valid">Send Feedback</button>
+    </form>
+  </div>
+</div>
