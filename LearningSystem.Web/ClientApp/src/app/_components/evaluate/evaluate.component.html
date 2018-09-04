@@ -1,0 +1,26 @@
+<h1>Evaluate Homework</h1>
+
+<div *ngIf="homeworkSubmissionId == 0">
+  No available homework for evaluation.
+</div>
+<div *ngIf="homeworkSubmissionId != 0">
+  <div>
+    <button (click)="downloadHomework()">Download Homework</button>
+  </div>
+
+  <div class="container col-md-12">
+    <form (ngSubmit)="onSubmit()" #valuationForm="ngForm">
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" class="form-control" id="description" required [(ngModel)]="model.description" name="description">
+      </div>
+
+      <div class="form-group">
+        <label for="valuation">Valuation</label>
+        <input type="number" class="form-control" id="valuation" required [(ngModel)]="model.valuation" name="valuation">
+      </div>
+
+      <button class="btn btn-success" (ngSubmit)="onSubmit()" [disabled]="!valuationForm.form.valid">Submit</button>
+    </form>
+  </div>
+</div>

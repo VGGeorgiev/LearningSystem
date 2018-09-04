@@ -9,5 +9,7 @@ namespace LearningSystem.Core.Dtos
         public string Content { get; set; }
 
         public DateTime Deadline { get; set; }
+
+        public bool HasUserSubmission { get; set; }
     }
 }

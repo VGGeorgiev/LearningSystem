@@ -1,14 +1,44 @@
-<h1>{{course.name}}</h1>
+<h1 style="text-align:center;">{{course.name}}</h1>
 
-<ul>
-  <li *ngFor="let lecture of course.lectures">
-    {{lecture.name}} (video: {{lecture.videoUrl}})
-    <br />
-    Homework
-    <ul>
-      <li *ngFor="let homework of lecture.homeworkAssignments">
-        {{homework.content}} ({{homework.deadline}})
-      </li>
-    </ul>
-  </li>
-</ul>
+<div class="panel panel-warning" *ngFor="let lecture of course.lectures">
+  <div class="panel-heading"><h4><strong>{{lecture.name}}</strong></h4></div>
+  <div class="panel-body">
+    <div>
+      <p>{{lecture.description}}</p>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <strong>Video:</strong> <br />
+        <iframe width="400" height="250" [src]='lecture.safeVideoUrl' frameborder="0" allowfullscreen></iframe>
+      </div>
+      <div class="col-md-6">
+        <strong>Homework:</strong> <br />
+        <div >
+          <ul class="list-group">
+            <li class="list-group-item" *ngFor="let homework of lecture.homeworkAssignments">
+              <div>
+                {{homework.content}} <br />
+                (<em>Deadline: {{homework.deadline | date: 'HH:MM dd.MM.yyyy'}}</em>) <br />
+              </div>
+              <div *ngIf="!homework.hasUserSubmission && homework.deadline > now">
+                Submit homework:
+                <input type="file" (change)="fileChange($event)" placeholder="Upload file" accept=".txt">
+                <br />
+                <button class="btn btn-sm btn-success">Submit</button>
+              </div>
+              <div>
+                <span *ngIf="homework.deadline < now" class="text-warning">Deadline expired!</span>
+                <span *ngIf="homework.hasUserSubmission" class="text-success"> You submitted homework.</span>
+                <span *ngIf="!homework.hasUserSubmission" class="text-danger"> You did not submitted homework.</span>
+              </div>
+              <div *ngIf="homework.hasUserSubmission && homework.deadline < now">
+                <a [routerLink]="['/evaluate', homework.id]">Evaluate homeworks</a>
+              </div>
+            </li>
+            <li class="list-group-item" *ngIf="!lecture.homeworkAssignments.length"><em>No homework assignment</em></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
