@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    public class HomeworkSubmission : BaseEntity
+    public class HomeworkSubmission : AuditInfo, IEntity
     {
         public int HomeworkAssignmentId { get; set; }
 

@@ -1,6 +1,6 @@
 ﻿namespace LearningSystem.Core.Entities
 {
-    public class CourseInSemester : BaseEntity
+    public class CourseInSemester : AuditInfo, IEntity
     {
         public int CourseId { get; set; }
 

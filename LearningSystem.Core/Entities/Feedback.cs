@@ -1,6 +1,6 @@
 ﻿namespace LearningSystem.Core.Entities
 {
-    public class Feedback : BaseEntity
+    public class Feedback : AuditInfo, IEntity
     {
         public string Content { get; set; }
 

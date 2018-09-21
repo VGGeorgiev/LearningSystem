@@ -1,6 +1,6 @@
 ﻿namespace LearningSystem.Core.Entities
 {
-    public class HomeworkEvaluation : BaseEntity
+    public class HomeworkEvaluation : AuditInfo, IEntity
     {
         public string Description { get; set; }
 

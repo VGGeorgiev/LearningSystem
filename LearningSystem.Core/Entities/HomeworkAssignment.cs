@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace LearningSystem.Core.Entities
 {
-    public class HomeworkAssignment : BaseEntity
+    public class HomeworkAssignment : AuditInfo, IEntity
     {
         public string Content { get; set; }
 

@@ -2,7 +2,7 @@
 
 namespace LearningSystem.Core.Entities
 {
-    public class Course : BaseEntity
+    public class Course : AuditInfo, IEntity
     {
         public string Name { get; set; }
 

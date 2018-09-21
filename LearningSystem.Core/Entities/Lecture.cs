@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    public class Lecture : BaseEntity
+    public class Lecture : AuditInfo, IEntity
     {
         public string Name { get; set; }
 

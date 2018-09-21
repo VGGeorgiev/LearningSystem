@@ -1,6 +1,6 @@
 ﻿namespace LearningSystem.Core.Entities
 {
-    public class Application : BaseEntity
+    public class Application : AuditInfo, IEntity
     {
         public int SeasonId { get; set; }
 

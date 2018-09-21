@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace LearningSystem.Core.Entities
 {
-    public class Season : BaseEntity
+    public class Season : AuditInfo, IEntity
     {
         public string Name { get; set; }
 

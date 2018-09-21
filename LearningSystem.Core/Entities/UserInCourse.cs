@@ -1,6 +1,6 @@
 ﻿namespace LearningSystem.Core.Entities
 {
-    public class UserInCourse : BaseEntity
+    public class UserInCourse : AuditInfo, IEntity
     {
         public int UserId { get; set; }
 

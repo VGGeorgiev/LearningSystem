@@ -2,7 +2,7 @@ namespace LearningSystem.Core.Entities
 {
     using System.Collections.Generic;
 
-    public class User : BaseEntity
+    public class User : AuditInfo, IEntity
     {
         public string FirstName { get; set; }
 

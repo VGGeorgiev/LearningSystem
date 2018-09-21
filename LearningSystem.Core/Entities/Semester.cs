@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    public class Semester : BaseEntity
+    public class Semester : AuditInfo, IEntity
     {
         public string Name { get; set; }
 
