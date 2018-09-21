@@ -18,7 +18,7 @@
             this.courseRepository = courseRepository;
         }
 
-        public CourseDetailDto GetCourse(int id, int userId)
+        public CourseDetailDto GetCourse(int id)
         {
             var course = this.courseRepository
                 .Include(x => x.Lectures)
@@ -26,21 +26,7 @@
                 .ThenInclude<HomeworkAssignment, List<HomeworkSubmission>>(x => x.HomeworkSubmissions)                
                 .Get(id);
             var courseDto = Mapper.Map<CourseDetailDto>(course);
-
-            // TODO: Can be in Mapper?
-            foreach (var lecture in courseDto.Lectures)
-            {
-                foreach (var homeworkAssignment in lecture.HomeworkAssignments)
-                {
-                    homeworkAssignment.HasUserSubmission = course.Lectures
-                        .Where(x => x.Id == lecture.Id)
-                        .SelectMany(x => x.HomeworkAssignments)
-                        .Where(x => x.Id == homeworkAssignment.Id)
-                        .Select(x => x.HomeworkSubmissions.Any(hs => hs.UserId == userId))
-                        .FirstOrDefault();
-                }
-            }
-
+            
             return courseDto;
         }
     }

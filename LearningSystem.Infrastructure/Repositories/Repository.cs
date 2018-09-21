@@ -4,38 +4,35 @@
     using LearningSystem.Core.Repositories;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Query;
-    using Microsoft.EntityFrameworkCore.Query.Internal;
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using System.Linq.Expressions;
-    using System.Reflection;
 
-    public class Repository<T> : IRepository<T> where T : BaseEntity
+    public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, IEntity
     {
         protected readonly DataContext context;
-        protected DbSet<T> entities;
-        protected IQueryable<T> queriableEntities;
+        protected DbSet<TEntity> entities;
+        protected IQueryable<TEntity> queriableEntities;
         string errorMessage = string.Empty;
 
         public Repository(DataContext context)
         {
             this.context = context;
-            entities = context.Set<T>();
-            queriableEntities = context.Set<T>();
+            entities = context.Set<TEntity>();
+            queriableEntities = context.Set<TEntity>();
         }
-        public IEnumerable<T> GetAll()
+        public IEnumerable<TEntity> GetAll()
         {
             return queriableEntities.AsEnumerable();
         }
 
-        public T Get(int id)
+        public TEntity Get(int id)
         {
             return queriableEntities.SingleOrDefault(s => s.Id == id);
         }
 
-        public void Insert(T entity)
+        public void Insert(TEntity entity)
         {
             if (entity == null)
             {
@@ -46,7 +43,7 @@
             context.SaveChanges();
         }
 
-        public void Update(T entity)
+        public void Update(TEntity entity)
         {
             if (entity == null)
             {
@@ -57,7 +54,7 @@
             context.SaveChanges();
         }
 
-        public void Delete(T entity)
+        public void Delete(TEntity entity)
         {
             if (entity == null)
             {
@@ -73,22 +70,22 @@
             context.SaveChanges();
         }
         
-        public IRepository<T> Include<TProperty>(Expression<Func<T, TProperty>> navigationPropertyPath)
+        public IRepository<TEntity> Include<TProperty>(Expression<Func<TEntity, TProperty>> navigationPropertyPath)
         {
             queriableEntities = queriableEntities.Include(navigationPropertyPath);
             return this;
         }
         
-        public IRepository<T> ThenInclude<TPreviousProperty, TProperty>(Expression<Func<TPreviousProperty, TProperty>> navigationPropertyPath)
+        public IRepository<TEntity> ThenInclude<TPreviousProperty, TProperty>(Expression<Func<TPreviousProperty, TProperty>> navigationPropertyPath)
         {
-            var includableQueryableEntities = queriableEntities as IIncludableQueryable<T, TPreviousProperty>;
+            var includableQueryableEntities = queriableEntities as IIncludableQueryable<TEntity, TPreviousProperty>;
             if (includableQueryableEntities != null)
             {
                 queriableEntities = includableQueryableEntities.ThenInclude(navigationPropertyPath);
             }
             else
             {
-                var includableQueryableListEntities = queriableEntities as IIncludableQueryable<T, List<TPreviousProperty>>;
+                var includableQueryableListEntities = queriableEntities as IIncludableQueryable<TEntity, List<TPreviousProperty>>;
                 queriableEntities = includableQueryableListEntities.ThenInclude(navigationPropertyPath);
             }
 

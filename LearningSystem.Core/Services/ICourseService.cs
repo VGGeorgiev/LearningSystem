@@ -4,6 +4,6 @@
 
     public interface ICourseService
     {
-        CourseDetailDto GetCourse(int id, int userId);
+        CourseDetailDto GetCourse(int id);
     }
 }
