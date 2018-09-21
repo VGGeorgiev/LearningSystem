@@ -28,7 +28,8 @@
     "bootstrap": "^3.3.7",
     "core-js": "^2.5.5",
     "rxjs": "^6.1.0",
-    "zone.js": "^0.8.26"
+    "zone.js": "^0.8.26",
+    "angular-alert-module": "2.0.3"
   },
   "devDependencies": {
     "@angular/cli": "~1.7.0",
