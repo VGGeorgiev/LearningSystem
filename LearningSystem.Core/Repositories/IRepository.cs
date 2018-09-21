@@ -5,22 +5,22 @@
     using System.Linq.Expressions;
     using LearningSystem.Core.Entities;
 
-    public interface IRepository<T> where T : BaseEntity
+    public interface IRepository<TEntity> where TEntity : IEntity
     {
-        IEnumerable<T> GetAll();
-        
-        T Get(int id);
+        IEnumerable<TEntity> GetAll();
 
-        void Insert(T entity);
+        TEntity Get(int id);
 
-        void Update(T entity);
+        void Insert(TEntity entity);
 
-        void Delete(T entity);
+        void Update(TEntity entity);
+
+        void Delete(TEntity entity);
         
         void SaveChanges();
 
-        IRepository<T> Include<TProperty>(Expression<Func<T, TProperty>> navigationPropertyPath);
+        IRepository<TEntity> Include<TProperty>(Expression<Func<TEntity, TProperty>> navigationPropertyPath);
 
-        IRepository<T> ThenInclude<TPreviousProperty, TProperty>(Expression<Func<TPreviousProperty, TProperty>> navigationPropertyPath);
+        IRepository<TEntity> ThenInclude<TPreviousProperty, TProperty>(Expression<Func<TPreviousProperty, TProperty>> navigationPropertyPath);
     }
 }
