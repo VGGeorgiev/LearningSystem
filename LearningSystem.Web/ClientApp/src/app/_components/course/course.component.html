@@ -22,9 +22,8 @@
               </div>
               <div *ngIf="!homework.hasUserSubmission && homework.deadline > now">
                 Submit homework:
-                <input type="file" (change)="fileChange($event)" placeholder="Upload file" accept=".txt">
+                <input type="file" (change)="fileChange($event, homework)" placeholder="Upload file" accept=".txt">
                 <br />
-                <button class="btn btn-sm btn-success">Submit</button>
               </div>
               <div>
                 <span *ngIf="homework.deadline < now" class="text-warning">Deadline expired!</span>

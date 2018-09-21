@@ -1,13 +1,15 @@
 namespace LearningSystem.Web.Helpers
 {
+    using System.Linq;
+    using System.IO;
+    using Microsoft.AspNetCore.Http;
+
     using AutoMapper;
+
     using LearningSystem.Core.Entities;
     using LearningSystem.Core.Dtos;
-    using System.Linq;
     using LearningSystem.Web.Models;
-    using Microsoft.AspNetCore.Http;
-    using System.IO;
-
+    
     public class AutoMapperProfile : Profile
     {
         private IHttpContextAccessor httpContextAccessor;
@@ -26,7 +28,14 @@ namespace LearningSystem.Web.Helpers
             CreateMap<Course, CourseDto>();
             CreateMap<ApplicationDto, Application>();
             CreateMap<Course, CourseDetailDto>();
-            CreateMap<HomeworkAssignment, HomeworkAssignmentDto>();
+            CreateMap<HomeworkAssignment, HomeworkAssignmentDto>()
+                .ForMember(x => x.HasUserSubmission, x => x.MapFrom(m => m.Lecture.Course.Lectures
+                .Where(l => l.Id == m.LectureId)
+                .SelectMany(ha => ha.HomeworkAssignments)
+                .Where(ha => ha.Id == m.Id)
+                .Select(ha => ha.HomeworkSubmissions.Any(hs => hs.UserId == int.Parse(httpContextAccessor.HttpContext.User.Identity.Name)))
+                .FirstOrDefault()));
+            
             CreateMap<Lecture, LectureDto>();
             CreateMap<ApplicationRequest, ApplicationDto>();
             CreateMap<HomeworkEvaluationDto, HomeworkEvaluation>()

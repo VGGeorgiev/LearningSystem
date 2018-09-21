@@ -53,7 +53,7 @@ namespace LearningSystem.Web
             services.AddHttpContextAccessor();
             services.AddAutoMapper(x => x.AddProfile(new AutoMapperProfile(services.BuildServiceProvider().GetService<IHttpContextAccessor>())));
             //services.AddAutomapperConfiguration(services.BuildServiceProvider().GetService<IHttpContextAccessor>());
-
+            
             // configure strongly typed settings objects
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);

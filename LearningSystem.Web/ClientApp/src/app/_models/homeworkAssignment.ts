@@ -3,5 +3,4 @@ export class HomeworkAssignment {
   content: string;
   deadline: Date;
   hasUserSubmission: boolean;
-
 }

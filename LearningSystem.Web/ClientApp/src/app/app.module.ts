@@ -24,7 +24,7 @@ import { CourseComponent } from './_components/course/course.component';
 import { CourseService } from './_services/course.service';
 import { EvaluateComponent } from './_components/evaluate/evaluate.component';
 import { ProfileComponent } from './_components/profile/profile.component';
-
+import { AlertsModule } from 'angular-alert-module';
 
 @NgModule({
   declarations: [
@@ -48,6 +48,7 @@ import { ProfileComponent } from './_components/profile/profile.component';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
+    AlertsModule.forRoot(),
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full', canActivate: [AuthGuard] },
       { path: 'counter', component: CounterComponent },

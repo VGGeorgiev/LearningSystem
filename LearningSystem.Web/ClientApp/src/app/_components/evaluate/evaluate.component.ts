@@ -4,6 +4,7 @@ import { Application, Evaluation } from '../../_models';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HomeworkService } from '../../_services';
 import { HomeworkAssignment } from '../../_models/homeworkAssignment';
+import { AlertsService } from 'angular-alert-module';
 
 @Component({
   selector: 'evaluate',
@@ -14,13 +15,22 @@ export class EvaluateComponent {
   private homeworkAssignmentId: number;
   private homeworkSubmissionId: number;
 
-  constructor(private route: ActivatedRoute, private homeworkService: HomeworkService, private router: Router) {
+  constructor(
+    private route: ActivatedRoute,
+    private homeworkService: HomeworkService,
+    private router: Router,
+    private alerts: AlertsService) {
     this.route.params.subscribe(params => {
       this.homeworkAssignmentId = parseInt(params['id']);
 
-      this.homeworkService.getRandonHomeworkSubmissionId(this.homeworkAssignmentId).subscribe(data => {
-        this.homeworkSubmissionId = data;
-      });
+      this.getRandomHomework();
+    });
+  }
+
+  getRandomHomework() {
+    this.homeworkService.getRandonHomeworkSubmissionId(this.homeworkAssignmentId).subscribe(data => {
+      this.homeworkSubmissionId = data;
+      this.model = new Evaluation();
     });
   }
 
@@ -37,8 +47,8 @@ export class EvaluateComponent {
   onSubmit() {
     this.model.homeworkSubmissionId = this.homeworkSubmissionId;
     this.homeworkService.submitHomeworkEvaluation(this.model).subscribe(data => {
-      // TODO: Test whether the page is refreshed
-      this.router.navigate(["/evaluate/" + this.homeworkAssignmentId]);
+      this.alerts.setMessage('Successfuly evaluated homework!', 'success');
+      this.getRandomHomework();
     });
   }
 }
