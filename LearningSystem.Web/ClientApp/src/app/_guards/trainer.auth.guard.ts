@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
 @Injectable()
 export class TrainerAuthGuard implements CanActivate {
 
-  constructor(private router: Router, private userService: UserService, private authService: AuthenticationService) { }
+  constructor(private userService: UserService, private authService: AuthenticationService) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     var userId = this.authService.getCurrentUser().id;
