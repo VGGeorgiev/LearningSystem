@@ -29,5 +29,30 @@
             
             return courseDto;
         }
+
+        public void Delete(int id)
+        {
+            var course = this.courseRepository.Get(id);
+            this.courseRepository.Delete(course);
+        }
+
+        public void Edit(Course course)
+        {
+            this.courseRepository.Update(course);
+        }
+
+        public IEnumerable<CourseWithSemesterDto> GetAll()
+        {
+            var courses = this.courseRepository
+                .Include(x => x.Semester)
+                .GetAll();
+            var coursesDto = Mapper.Map<IEnumerable<CourseWithSemesterDto>>(courses);
+            return coursesDto;
+        }
+
+        public void Insert(Course course)
+        {
+            this.courseRepository.Insert(course);
+        }
     }
 }

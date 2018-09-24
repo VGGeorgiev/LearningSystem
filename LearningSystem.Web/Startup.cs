@@ -19,6 +19,8 @@ namespace LearningSystem.Web
     using Microsoft.EntityFrameworkCore;
     using LearningSystem.Core.Repositories;
     using Microsoft.AspNetCore.Http;
+    using LearningSystem.Core.Entities;
+    using Microsoft.AspNetCore.Authorization;
 
     public static class AutoMapperExtenssion
     {
@@ -57,7 +59,18 @@ namespace LearningSystem.Web
             // configure strongly typed settings objects
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
-            
+
+            //services.AddAuthorization(options =>
+            //{
+            //    options.AddPolicy("User", policy =>
+            //        policy.Requirements.Add(new UserTypeRequirement(UserType.User)));
+            //    options.AddPolicy("Trainer", policy =>
+            //        policy.Requirements.Add(new UserTypeRequirement(UserType.Trainer)));
+            //    options.AddPolicy("Student", policy =>
+            //        policy.Requirements.Add(new UserTypeRequirement(UserType.Student)));
+            //});
+            //services.AddSingleton<IAuthorizationHandler, UserTypeAuthorizationHandler>();
+
             // configure jwt authentication
             var appSettings = appSettingsSection.Get<AppSettings>();
             var key = Encoding.ASCII.GetBytes(appSettings.Secret);

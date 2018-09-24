@@ -8,4 +8,9 @@
 
         public int Credits { get; set; }
     }
+
+    public class CourseWithSemesterDto : CourseDto
+    {
+        public string SemesterName { get; set; }
+    }
 }

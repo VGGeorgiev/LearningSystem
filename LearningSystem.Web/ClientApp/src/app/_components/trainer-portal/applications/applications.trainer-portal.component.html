@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-md-12">
+    <h1>Applications</h1>
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">First Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">High School Grade</th>
+          <th scope="col">Season</th>
+          <th scope="col">Is Approved</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let application of applications">
+          <th scope="row">{{application.id}}</th>
+          <td>{{application.firstName}}</td>
+          <td>{{application.lastName}}</td>
+          <td>{{application.highSchoolGrade}}</td>
+          <td>{{application.seasonName}}</td>
+          <td>{{application.isApproved}}</td>
+          <td>
+            <button *ngIf="!application.isApproved" class="btn btn-success btn-sm" (click)="approveApplication(application.id)">Approve</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

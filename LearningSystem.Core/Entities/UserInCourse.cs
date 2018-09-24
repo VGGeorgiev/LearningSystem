@@ -10,6 +10,6 @@
 
         public Course Course { get; set; }
 
-        public decimal Grade { get; set; }
+        public decimal? Grade { get; set; }
     }
 }

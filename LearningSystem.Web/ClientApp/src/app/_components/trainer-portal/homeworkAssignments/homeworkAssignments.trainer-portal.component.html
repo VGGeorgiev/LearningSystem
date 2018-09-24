@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-md-12">
+
+    <h1>Homework Assignments</h1>
+    <a routerLink="/trainer-portal/homework-assignments-create" class="btn btn-primary">Create Homework Assignment</a>
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Content</th>
+          <th scope="col">Deadline</th>
+          <th scope="col">Lecture</th>
+          <th scope="col">Action</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let homeworkAssignment of homeworkAssignments">
+          <th scope="row">{{homeworkAssignment.id}}</th>
+          <td>{{homeworkAssignment.content}}</td>
+          <td>{{homeworkAssignment.deadline}}</td>
+          <td>{{homeworkAssignment.lectureName}}</td>
+          <td><a routerLink="/trainer-portal/homework-assignments-edit/{{homeworkAssignment.id}}">Edit</a></td>
+          <td><a href="javascript:void(0)" (click)="deleteHomeworkAssignment(homeworkAssignment.id)">Delete</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

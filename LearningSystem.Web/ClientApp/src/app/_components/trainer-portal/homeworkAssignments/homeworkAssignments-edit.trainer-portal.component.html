@@ -1,0 +1,21 @@
+<div>
+  <h1>Create Homework Assignment</h1>
+  <form (ngSubmit)="onSubmit()" #applicationForm="ngForm">
+    <div class="form-group">
+      <label for="content">Content</label>
+      <input type="text" class="form-control" id="content" aria-describedby="emailHelp" [(ngModel)]="homeworkAssignment.content" placeholder="Enter content" name="content">
+    </div>
+    <div class="form-group">
+      <label for="deadline">Deadline</label>
+      <input type="date" class="form-control" id="deadline" [ngModel]="homeworkAssignment.deadline | date:'yyyy-MM-dd'" (ngModelChange)="homeworkAssignment.deadline = $event" name="deadline">
+    </div>
+    <div class="form-group">
+      <label for="lectureId">Lecture</label>
+      <select class="form-control" [(ngModel)]="homeworkAssignment.lectureId" name="lectureId">
+        <option value="{{lecture.id}}" *ngFor="let lecture of lectures">{{lecture.name}}</option>
+      </select>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary" (ngSubmit)="onSubmit()" [disabled]="!applicationForm.form.valid">Submit</button>
+  </form>
+</div>

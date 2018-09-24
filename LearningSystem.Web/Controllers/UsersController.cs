@@ -24,20 +24,20 @@
     public class UsersController : ControllerBase
     {
         private IUserService _userService;
-        private IFeedbackService feedbackService;
+        private IStudentsInCourseService studentsInCourseService;
         private IMapper _mapper;
         private readonly AppSettings _appSettings;
 
         public UsersController(
             IUserService userService,
-            IFeedbackService feedbackService,
+            IStudentsInCourseService studentsInCourseService,
             IMapper mapper,
             IOptions<AppSettings> appSettings)
         {
             _userService = userService;
-            this.feedbackService = feedbackService;
             _mapper = mapper;
             _appSettings = appSettings.Value;
+            this.studentsInCourseService = studentsInCourseService;
         }
 
         [AllowAnonymous]
@@ -69,7 +69,8 @@
                 Username = user.Username,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
-                Token = tokenString
+                Token = tokenString,
+                Type = user.Type
             });
         }
 
@@ -115,14 +116,7 @@
             UserDto user = _userService.GetByUsername(username);
             return Ok(user);
         }
-
-        [HttpPost("feedback")]
-        public IActionResult InsertFeedback([FromBody]FeedbackDto feedback)
-        {
-            var feedbackDto = this.feedbackService.InsertFeedback(feedback);
-            return Ok(feedbackDto);
-        }
-
+        
         [HttpPut("{id}")]
         public IActionResult Update(int id, [FromBody]UserDto userDto)
         {

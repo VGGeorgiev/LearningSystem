@@ -39,6 +39,11 @@
                 <span class='glyphicon glyphicon-user'></span> Profile
               </a>
             </li>
+            <li *ngIf="isLoggedIn() && isTrainer()" [routerLinkActive]='["link-active"]'>
+              <a [routerLink]='["/trainer-portal/"]'>
+                <span class='glyphicon glyphicon-user'></span> Trainer Portal
+              </a>
+            </li>
             <li *ngIf="isLoggedIn()" [routerLinkActive]='["link-active"]'>
               <a (click)='logout()'>
                 <span class='glyphicon glyphicon-off'></span> Logout

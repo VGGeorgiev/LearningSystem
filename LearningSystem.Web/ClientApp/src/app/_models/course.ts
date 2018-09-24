@@ -5,6 +5,11 @@ export class Course {
   name: string;
 }
 
+export class CourseInput extends Course {
+  credits: number;
+  semesterId: number;
+}
+
 export class CourseDetail extends Course {
   lectures: Lecture[];
 }

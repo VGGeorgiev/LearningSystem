@@ -6,31 +6,29 @@
 
   <dt class="col-sm-3">Last Name</dt>
   <dd class="col-sm-9">{{user.lastName}}</dd>
-
-  <dt class="col-sm-3">Feedback</dt>
-  <dd class="col-sm-9">
-    <ul>
-      <li *ngFor="let feedback of user.feedbacks">{{feedback.content}} (Rating: {{feedback.rating}})</li>
-    </ul>
-  </dd>
 </dl>
 
-<div *ngIf="!isMyProfile">
-  <h2>Give feedback</h2>
-
-  <div class="container col-md-12">
-    <form (ngSubmit)="onSubmit()" #feedbackForm="ngForm">
-      <div class="form-group">
-        <label for="content">Content</label>
-        <textarea class="form-control" id="content" required [(ngModel)]="model.content" name="content"></textarea>
-      </div>
-
-      <div class="form-group">
-        <label for="rating">Rating</label>
-        <input type="number" class="form-control" id="rating" required [(ngModel)]="model.rating" name="rating">
-      </div>
-
-      <button class="btn btn-success" (ngSubmit)="onSubmit()" [disabled]="!feedbackForm.form.valid">Send Feedback</button>
-    </form>
-  </div>
+<div>
+  <h2>Courses</h2>
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Course</th>
+        <th scope="col">Grade</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let userInCourse of userInCourses">
+        <td>{{userInCourse.courseName}}</td>
+        <td>
+          <input type="number" [(ngModel)]="userInCourse.grade" name="grade" />
+          <span *ngIf="userInCourse.grade == 0"> * No grade yet</span>
+        </td>
+        <td>
+          <button (click)="changeGrade(userInCourse)" class="btn btn-success btn-sm">Change Grade</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>

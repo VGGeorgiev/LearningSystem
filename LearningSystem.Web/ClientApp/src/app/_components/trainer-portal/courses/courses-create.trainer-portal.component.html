@@ -1,0 +1,21 @@
+<div>
+  <h1>Create Course</h1>
+  <form (ngSubmit)="onSubmit()" #applicationForm="ngForm">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" aria-describedby="emailHelp" [(ngModel)]="course.name" placeholder="Enter name" name="name">
+    </div>
+    <div class="form-group">
+      <label for="credits">Credits</label>
+      <input type="number" class="form-control" id="credits" aria-describedby="emailHelp" [(ngModel)]="course.credits" placeholder="Enter credits" name="credits">
+    </div>
+    <div class="form-group">
+      <label for="name">Semester</label>
+      <select class="form-control" [(ngModel)]="course.semesterId" name="semesterId">
+        <option value="{{semester.id}}" *ngFor="let semester of semesters">{{semester.name}}</option>
+      </select>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary" (ngSubmit)="onSubmit()" [disabled]="!applicationForm.form.valid">Submit</button>
+  </form>
+</div>

@@ -2,12 +2,15 @@
 {
     using System.Collections.Generic;
 
-    public class SemesterDto
+    public class SemesterDto : SemesterShortDto
+    {
+        public IEnumerable<CourseDto> Courses { get; set; }
+    }
+
+    public class SemesterShortDto
     {
         public int Id { get; set; }
 
         public string Name { get; set; }
-
-        public IEnumerable<CourseDto> Courses { get; set; }
     }
 }

@@ -19,5 +19,7 @@
         void Update(User user, string password = null);
 
         void Delete(int id);
+
+        void MakeStudent(int id);
     }
 }

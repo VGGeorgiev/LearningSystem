@@ -6,6 +6,6 @@
     {
         public string Name { get; set; }
 
-        public List<CourseInSemester> CoursesInSemester { get; set; }
+        public List<Course> Courses { get; set; }
     }
 }

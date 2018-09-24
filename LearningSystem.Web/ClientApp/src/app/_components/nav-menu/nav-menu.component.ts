@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthenticationService } from '../../_services';
 import { Router } from '@angular/router';
-import { User } from '../../_models';
+import { User, UserType } from '../../_models';
 
 @Component({
   selector: 'app-nav-menu',
@@ -32,5 +32,9 @@ export class NavMenuComponent {
 
   isLoggedIn() {
     return this.authenticationService.isLoggedIn();
+  }
+
+  isTrainer() {
+    return this.currentUser.type == UserType.Trainer;
   }
 }

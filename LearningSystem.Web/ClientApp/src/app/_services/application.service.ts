@@ -22,4 +22,12 @@ export class ApplicationService {
     headers.append('Accept', 'application/json');
     return this.http.post(`${environment.apiBaseUrl}/application/add`, formData, { headers: headers });
   }
+
+  getAll() {
+    return this.http.get<Application[]>(`${environment.apiBaseUrl}/application`);
+  }
+
+  approveApplication(id: number) {
+    return this.http.post(`${environment.apiBaseUrl}/application/approve/${id}`, {});
+  }
 }

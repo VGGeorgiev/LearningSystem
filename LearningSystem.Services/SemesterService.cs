@@ -20,19 +20,48 @@ namespace LearningSystem.Services
         public IEnumerable<SemesterDto> GetSemestersWithCourses()
         {
             var semesters = this.semesterRepository
-                .Include(x => x.CoursesInSemester)
-                .ThenInclude<CourseInSemester, Course>(x => x.Course)
+                .Include(x => x.Courses)
                 .GetAll();
             var semestersDto = semesters.Select(x => new SemesterDto() {
                 Id = x.Id,
                 Name = x.Name,
-                Courses = x.CoursesInSemester.Select(c => new CourseDto() {
-                    Id = c.Course.Id,
-                    Name = c.Course.Name,
-                    Credits = c.Course.Credits
+                Courses = x.Courses.Select(c => new CourseDto() {
+                    Id = c.Id,
+                    Name = c.Name,
+                    Credits = c.Credits
                 })
             });
             return semestersDto;
+        }
+
+        public void InsertSemester(Semester semester)
+        {
+            this.semesterRepository.Insert(semester);
+        }
+
+        public void DeleteSemester(int id)
+        {
+            var semester = this.semesterRepository.Get(id);
+            this.semesterRepository.Delete(semester);
+        }
+
+        public void EditSemester(Semester semester)
+        {
+            this.semesterRepository.Update(semester);
+        }
+
+        public IEnumerable<SemesterShortDto> GetAll()
+        {
+            var semesters = this.semesterRepository.GetAll();
+            var semestersDto = Mapper.Map<IEnumerable<SemesterShortDto>>(semesters);
+            return semestersDto;
+        }
+
+        public SemesterShortDto GetById(int id)
+        {
+            var semester = this.semesterRepository.Get(id);
+            var semesterDto = Mapper.Map<SemesterShortDto>(semester);
+            return semesterDto;
         }
     }
 }

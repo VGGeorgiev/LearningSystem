@@ -18,6 +18,13 @@ namespace LearningSystem.Services
             this.seasonsRepository = seasonsRepository;
         }
 
+        public IEnumerable<SeasonShortDto> GetAll()
+        {
+            var seasons = this.seasonsRepository.GetAll();
+            var seasonsDto = Mapper.Map<IEnumerable<SeasonShortDto>>(seasons);
+            return seasonsDto;
+        }
+
         public IEnumerable<SeasonDto> GetAvailableSeasons()
         {
             var seasons = this.seasonsRepository
@@ -33,6 +40,22 @@ namespace LearningSystem.Services
             var season = this.seasonsRepository.Get(id);
             var seasonDto = Mapper.Map<SeasonDto>(season);
             return seasonDto;
+        }
+
+        public void InsertSeason(Season season)
+        {
+            this.seasonsRepository.Insert(season);
+        }
+
+        public void EditSeason(Season season)
+        {
+            this.seasonsRepository.Update(season);
+        }
+
+        public void DeleteSeason(int id)
+        {
+            var season = this.seasonsRepository.Get(id);
+            this.seasonsRepository.Delete(season);
         }
     }
 }

@@ -10,11 +10,7 @@ namespace LearningSystem.Core.Entities
         public int LectureId { get; set; }
 
         public Lecture Lecture { get; set; }
-
-        public int UserId { get; set; }
-
-        public User User { get; set; }
-
+        
         public DateTime Deadline { get; set; }
 
         public List<HomeworkSubmission> HomeworkSubmissions { get; set; }

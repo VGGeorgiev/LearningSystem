@@ -2,7 +2,9 @@
 {
     using AutoMapper;
     using LearningSystem.Core.Dtos;
+    using LearningSystem.Core.Entities;
     using LearningSystem.Core.Services;
+    using LearningSystem.Web.Models;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
@@ -16,11 +18,16 @@
     {
         private IHomeworkSubmissionService homeworkSubmissionService;
         private IHomeworkEvaluationService homeworkEvaluationService;
+        private IHomeworkAssignmentService homeworkAssignmentService;
 
-        public HomeworkController(IHomeworkSubmissionService homeworkSubmissionService, IHomeworkEvaluationService homeworkEvaluationService)
+        public HomeworkController(
+            IHomeworkSubmissionService homeworkSubmissionService, 
+            IHomeworkEvaluationService homeworkEvaluationService,
+            IHomeworkAssignmentService homeworkAssignmentService)
         {
             this.homeworkSubmissionService = homeworkSubmissionService;
             this.homeworkEvaluationService = homeworkEvaluationService;
+            this.homeworkAssignmentService = homeworkAssignmentService;
         }
 
         /// <param name="id">Homework Assignment Id</param>
@@ -61,6 +68,43 @@
         {
             this.homeworkEvaluationService.EvaluateHomework(homeworkEvaluation);
             return this.Ok();
+        }
+
+        [HttpGet("getAllAssignments")]
+        public IActionResult GetAllHomeworkAssignments()
+        {
+            var homeworkAssignments = this.homeworkAssignmentService.GetAll();
+            return Ok(homeworkAssignments);
+        }
+
+        [HttpGet("getAssignmentById/{id}")]
+        public IActionResult GetHomeworkAssignmentById(int id)
+        {
+            var homeworkAssignment = this.homeworkAssignmentService.GetById(id);
+            return Ok(homeworkAssignment);
+        }
+
+        [HttpPut("editAssignment")]
+        public IActionResult EditHomeworkAssignmentById(HomeworkAssignmentRequest homeworkAssignment)
+        {
+            var homeworkAssignmentModel = Mapper.Map<HomeworkAssignment>(homeworkAssignment);
+            this.homeworkAssignmentService.Edit(homeworkAssignmentModel);
+            return Ok();
+        }
+
+        [HttpDelete("deleteAssignment/{id}")]
+        public IActionResult DeleteHomeworkAssignmentById(int id)
+        {
+            this.homeworkAssignmentService.Delete(id);
+            return Ok();
+        }
+
+        [HttpPost("insertAssignment")]
+        public IActionResult InsertHomeworkAssignment(HomeworkAssignmentRequest homeworkAssignment)
+        {
+            var homeworkAssignmentModel = Mapper.Map<HomeworkAssignment>(homeworkAssignment);
+            this.homeworkAssignmentService.Insert(homeworkAssignmentModel);
+            return Ok();
         }
     }
 }

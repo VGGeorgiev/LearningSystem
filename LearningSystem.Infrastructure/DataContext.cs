@@ -22,29 +22,13 @@ namespace LearningSystem.Infrastructure
         public DbSet<HomeworkSubmission> HomeworkSubmissions { get; set; }
 
         public DbSet<HomeworkEvaluation> HomeworkEvaluations { get; set; }
-
-        public DbSet<Feedback> Feedbacks { get; set; }
-
+        
         public DbSet<Course> Courses { get; set; }
-
-        public DbSet<CourseInSemester> CoursesInSemesters { get; set; }
-
+        
         public DbSet<Application> Applications { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Feedback>()
-                .HasOne<User>(x => x.User)
-                .WithMany(x => x.Feedbacks)
-                .HasForeignKey(x => x.UserId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Feedback>()
-                .HasOne<User>(x => x.Reporter)
-                .WithMany()
-                .HasForeignKey(x => x.ReporterId)
-                .OnDelete(DeleteBehavior.Restrict);
-
             modelBuilder.Entity<HomeworkEvaluation>()
                 .HasOne(x => x.HomeworkSubmission)
                 .WithMany(x => x.HomeworkEvaluations)

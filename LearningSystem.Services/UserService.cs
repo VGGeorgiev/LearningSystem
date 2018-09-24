@@ -57,11 +57,9 @@ namespace LearningSystem.Infrastructure.Services
         public UserDto GetByUsername(string username)
         {
             var user = this.usersRepository
-                .Include(x => x.Feedbacks)
-                .ThenInclude<Feedback, User>(x => x.Reporter)
                 .GetAll()
                 .FirstOrDefault(x => x.Username == username);
-            var userDto = Mapper.Map<UserDetailDto>(user);
+            var userDto = Mapper.Map<UserDto>(user);
             return userDto;
         }
 
@@ -103,6 +101,7 @@ namespace LearningSystem.Infrastructure.Services
             user.FirstName = userParam.FirstName;
             user.LastName = userParam.LastName;
             user.Username = userParam.Username;
+            user.Type = userParam.Type;
 
             // update password if it was entered
             if (!string.IsNullOrWhiteSpace(password))
@@ -157,6 +156,13 @@ namespace LearningSystem.Infrastructure.Services
             }
 
             return true;
+        }
+
+        public void MakeStudent(int id)
+        {
+            var user = this.usersRepository.Get(id);
+            user.Type = UserType.Student;
+            this.usersRepository.Update(user);
         }
     }
 }

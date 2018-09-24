@@ -1,7 +1,10 @@
 import { Course } from "./course";
 
-export class Semester {
+export class SemesterInput {
   id: number;
   name: string;
+}
+
+export class Semester extends SemesterInput {
   courses: Course[];
 }

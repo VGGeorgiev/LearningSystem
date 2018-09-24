@@ -15,10 +15,12 @@
     public class ApplicationController : ControllerBase
     {
         private IApplicationService applicationService;
+        private IUserService userService;
 
-        public ApplicationController(IApplicationService applicationService)
+        public ApplicationController(IApplicationService applicationService, IUserService userService)
         {
             this.applicationService = applicationService;
+            this.userService = userService;
         }
 
         [HttpPost("add")]
@@ -27,6 +29,21 @@
             var applicationDto = Mapper.Map<ApplicationDto>(application);
             this.applicationService.InsertApplication(applicationDto);
             return Ok();
+        }
+
+        [HttpGet]
+        public IActionResult Get()
+        {
+            var applications = this.applicationService.GetAll();
+            return Ok(applications);
+        }
+
+        [HttpPost("approve/{id}")]
+        public IActionResult Approve(int id)
+        {
+            var application = this.applicationService.ApproveApplication(id);
+            this.userService.MakeStudent(application.UserId);
+            return this.Ok();
         }
     }
 }

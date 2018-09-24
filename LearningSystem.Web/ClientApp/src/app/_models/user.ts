@@ -1,13 +1,23 @@
-import { Feedback } from "./feedback";
-
-export class User {
-  id: number;
-  username: string;
-  password: string;
-  firstName: string;
-  lastName: string;
+export enum UserType {
+  User,
+  Student,
+  Trainer
 }
 
-export class UserDetail extends User {
-  feedbacks: Feedback[];
+export class UserInput {
+  id: number;
+  username: string;
+  firstName: string;
+  lastName: string;
+  type: UserType;
+}
+
+export class User extends UserInput {
+  password: string;
+}
+
+export class UserInCourse {
+  id: number;
+  courseName: string;
+  grade: number;
 }

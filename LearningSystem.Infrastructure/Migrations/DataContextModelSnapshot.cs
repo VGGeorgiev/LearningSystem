@@ -66,32 +66,13 @@ namespace LearningSystem.Infrastructure.Migrations
 
                     b.Property<string>("Name");
 
-                    b.HasKey("Id");
-
-                    b.ToTable("Courses");
-                });
-
-            modelBuilder.Entity("LearningSystem.Core.Entities.CourseInSemester", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CourseId");
-
-                    b.Property<DateTime>("CreatedDate");
-
-                    b.Property<DateTime?>("ModifiedDate");
-
                     b.Property<int>("SemesterId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CourseId");
-
                     b.HasIndex("SemesterId");
 
-                    b.ToTable("CoursesInSemesters");
+                    b.ToTable("Courses");
                 });
 
             modelBuilder.Entity("LearningSystem.Core.Entities.Feedback", b =>
@@ -137,13 +118,9 @@ namespace LearningSystem.Infrastructure.Migrations
 
                     b.Property<DateTime?>("ModifiedDate");
 
-                    b.Property<int>("UserId");
-
                     b.HasKey("Id");
 
                     b.HasIndex("LectureId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("HomeworkAssignments");
                 });
@@ -300,7 +277,7 @@ namespace LearningSystem.Infrastructure.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<decimal>("Grade");
+                    b.Property<decimal?>("Grade");
 
                     b.Property<DateTime?>("ModifiedDate");
 
@@ -328,15 +305,10 @@ namespace LearningSystem.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("LearningSystem.Core.Entities.CourseInSemester", b =>
+            modelBuilder.Entity("LearningSystem.Core.Entities.Course", b =>
                 {
-                    b.HasOne("LearningSystem.Core.Entities.Course", "Course")
-                        .WithMany("CoursesInSemester")
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("LearningSystem.Core.Entities.Semester", "Semester")
-                        .WithMany("CoursesInSemester")
+                        .WithMany("Courses")
                         .HasForeignKey("SemesterId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -360,11 +332,6 @@ namespace LearningSystem.Infrastructure.Migrations
                         .WithMany("HomeworkAssignments")
                         .HasForeignKey("LectureId")
                         .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("LearningSystem.Core.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("LearningSystem.Core.Entities.HomeworkEvaluation", b =>
@@ -409,7 +376,7 @@ namespace LearningSystem.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("LearningSystem.Core.Entities.User", "User")
-                        .WithMany()
+                        .WithMany("UsersInCourses")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

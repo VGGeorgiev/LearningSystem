@@ -8,7 +8,9 @@ namespace LearningSystem.Core.Entities
 
         public int Credits { get; set; }
 
-        public List<CourseInSemester> CoursesInSemester { get; set; }
+        public int SemesterId { get; set; }
+
+        public Semester Semester { get; set; }
 
         public List<Lecture> Lectures { get; set; }
     }

@@ -2,7 +2,12 @@
 {
     using System;
 
-    public class SeasonDto
+    public class SeasonDto : SeasonShortDto
+    {
+        public bool IsUserApplied { get; set; }
+    }
+
+    public class SeasonShortDto
     {
         public int Id { get; set; }
 
@@ -11,7 +16,5 @@
         public DateTime StartDate { get; set; }
 
         public int StudentsLimit { get; set; }
-
-        public bool IsUserApplied { get; set; }
     }
 }

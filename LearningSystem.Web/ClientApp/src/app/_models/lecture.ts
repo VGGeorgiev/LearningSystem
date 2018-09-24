@@ -9,3 +9,11 @@ export class Lecture {
   safeVideoUrl: SafeResourceUrl;
   homeworkAssignments: HomeworkAssignment[];
 }
+
+export class LectureInput {
+  id: number;
+  name: string;
+  description: string;
+  videoUrl: string;
+  courseId: number;
+}

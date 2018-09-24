@@ -17,7 +17,7 @@ namespace LearningSystem.Core.Entities
         public UserType Type { get; set; }
 
         public List<Application> Applications { get; set; }
-
-        public List<Feedback> Feedbacks { get; set; }
+        
+        public List<UserInCourse> UsersInCourses { get; set; }
     }
 }

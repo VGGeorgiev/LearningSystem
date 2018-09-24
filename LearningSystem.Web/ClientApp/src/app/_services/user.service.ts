@@ -1,39 +1,46 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { User, UserDetail } from '../_models';
+import { User, UserInput, UserInCourse } from '../_models';
 import { environment } from '../../environments/environment';
-import { Feedback } from '../_models/feedback';
 
 @Injectable()
 export class UserService {
-    constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-    getAll() {
-      return this.http.get<User[]>(`${environment.apiBaseUrl}/users`);
-    }
+  getAll() {
+    return this.http.get<User[]>(`${environment.apiBaseUrl}/users`);
+  }
 
-    getById(id: number) {
-      return this.http.get(`${environment.apiBaseUrl}/users/` + id);
-    }
+  getById(id: number) {
+    return this.http.get<User>(`${environment.apiBaseUrl}/users/` + id);
+  }
 
-    getByUsername(username: string) {
-      return this.http.get<UserDetail>(`${environment.apiBaseUrl}/users/get/` + username);
-    }
+  getByUsername(username: string) {
+    return this.http.get<User>(`${environment.apiBaseUrl}/users/get/` + username);
+  }
 
-    register(user: User) {
-      return this.http.post(`${environment.apiBaseUrl}/users/register`, user);
-    }
+  register(user: User) {
+    return this.http.post(`${environment.apiBaseUrl}/users/register`, user);
+  }
 
-    update(user: User) {
-      return this.http.put(`${environment.apiBaseUrl}/users/` + user.id, user);
-    }
+  update(user: User) {
+    return this.http.put(`${environment.apiBaseUrl}/users/` + user.id, user);
+  }
 
-    delete(id: number) {
-      return this.http.delete(`${environment.apiBaseUrl}/users/` + id);
-    }
+  updateType(user: UserInput) {
+    return this.http.put(`${environment.apiBaseUrl}/users/` + user.id, user);
+  }
 
-    sendFeedback(feedback: Feedback) {
-      return this.http.post<Feedback>(`${environment.apiBaseUrl}/users/feedback`, feedback);
-    }
+  delete(id: number) {
+    return this.http.delete(`${environment.apiBaseUrl}/users/` + id);
+  }
+  
+  getUserInCourses(userId: number) {
+    return this.http.get<UserInCourse[]>(`${environment.apiBaseUrl}/StudentsInCourse/get/` + userId);
+  }
+
+  changeGrade(userInCourse: UserInCourse) {
+    return this.http.post(`${environment.apiBaseUrl}/StudentsInCourse/changeGrade/`, userInCourse);
+  }
 }

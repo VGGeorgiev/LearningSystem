@@ -10,6 +10,10 @@ namespace LearningSystem.Core.Dtos
 
         public DateTime Deadline { get; set; }
 
+        public string LectureName { get; set; }
+
+        public string LectureId { get; set; }
+
         public bool HasUserSubmission { get; set; }
     }
 }
