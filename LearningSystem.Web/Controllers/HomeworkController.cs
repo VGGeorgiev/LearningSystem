@@ -4,6 +4,7 @@
     using LearningSystem.Core.Dtos;
     using LearningSystem.Core.Entities;
     using LearningSystem.Core.Services;
+    using LearningSystem.Web.Helpers;
     using LearningSystem.Web.Models;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
@@ -31,6 +32,7 @@
         }
 
         /// <param name="id">Homework Assignment Id</param>
+        [AuthorizeUserType(UserType.Student)]
         [HttpPost("upload/{id}")]
         public IActionResult UploadHomework(int id, IFormFile file)
         {
@@ -46,6 +48,7 @@
         /// </summary>
         /// <param name="id">Homework Assignment Id</param>
         /// <returns></returns>
+        [AuthorizeUserType(UserType.Student)]
         [HttpGet("getRandomHomeworkId/{id}")]
         public IActionResult GetRandomHomeworkId(int id)
         {
@@ -54,6 +57,7 @@
             return this.Ok(homeworkId);
         }
 
+        [AuthorizeUserType(UserType.Student)]
         [HttpGet("download/{id}")]
         public IActionResult DownloadHomework(int id)
         {
@@ -63,6 +67,7 @@
             return File(homework, contentType, fileName);
         }
 
+        [AuthorizeUserType(UserType.Student)]
         [HttpPost("evaluate")]
         public IActionResult EvaluateHomework(HomeworkEvaluationDto homeworkEvaluation)
         {
@@ -70,6 +75,7 @@
             return this.Ok();
         }
 
+        [AuthorizeUserType(UserType.Trainer)]
         [HttpGet("getAllAssignments")]
         public IActionResult GetAllHomeworkAssignments()
         {
@@ -77,6 +83,7 @@
             return Ok(homeworkAssignments);
         }
 
+        [AuthorizeUserType(UserType.Trainer)]
         [HttpGet("getAssignmentById/{id}")]
         public IActionResult GetHomeworkAssignmentById(int id)
         {
@@ -84,6 +91,7 @@
             return Ok(homeworkAssignment);
         }
 
+        [AuthorizeUserType(UserType.Trainer)]
         [HttpPut("editAssignment")]
         public IActionResult EditHomeworkAssignmentById(HomeworkAssignmentRequest homeworkAssignment)
         {
@@ -92,6 +100,7 @@
             return Ok();
         }
 
+        [AuthorizeUserType(UserType.Trainer)]
         [HttpDelete("deleteAssignment/{id}")]
         public IActionResult DeleteHomeworkAssignmentById(int id)
         {
@@ -99,6 +108,7 @@
             return Ok();
         }
 
+        [AuthorizeUserType(UserType.Trainer)]
         [HttpPost("insertAssignment")]
         public IActionResult InsertHomeworkAssignment(HomeworkAssignmentRequest homeworkAssignment)
         {

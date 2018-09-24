@@ -1,3 +1,4 @@
+
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Season, Application } from '../../_models';
 import { SeasonService, AuthenticationService } from '../../_services';

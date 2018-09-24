@@ -2,7 +2,9 @@
 {
     using AutoMapper;
     using LearningSystem.Core.Dtos;
+    using LearningSystem.Core.Entities;
     using LearningSystem.Core.Services;
+    using LearningSystem.Web.Helpers;
     using LearningSystem.Web.Models;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -31,6 +33,7 @@
             return Ok();
         }
 
+        [AuthorizeUserType(UserType.Trainer)]
         [HttpGet]
         public IActionResult Get()
         {
@@ -38,6 +41,7 @@
             return Ok(applications);
         }
 
+        [AuthorizeUserType(UserType.Trainer)]
         [HttpPost("approve/{id}")]
         public IActionResult Approve(int id)
         {

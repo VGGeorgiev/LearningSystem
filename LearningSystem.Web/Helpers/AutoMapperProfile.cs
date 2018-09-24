@@ -30,12 +30,8 @@ namespace LearningSystem.Web.Helpers
             CreateMap<Application, ApplicationDto>();
             CreateMap<Course, CourseDetailDto>();
             CreateMap<HomeworkAssignment, HomeworkAssignmentDto>()
-                .ForMember(x => x.HasUserSubmission, x => x.MapFrom(m => m.Lecture.Course.Lectures
-                .Where(l => l.Id == m.LectureId)
-                .SelectMany(ha => ha.HomeworkAssignments)
-                .Where(ha => ha.Id == m.Id)
-                .Select(ha => ha.HomeworkSubmissions.Any(hs => hs.UserId == int.Parse(httpContextAccessor.HttpContext.User.Identity.Name)))
-                .FirstOrDefault()));
+                .ForMember(x => x.HasUserSubmission, x => x.MapFrom(m => m.HomeworkSubmissions
+                .Any(hs => hs.UserId == int.Parse(httpContextAccessor.HttpContext.User.Identity.Name))));
             
             CreateMap<Lecture, LectureDto>();
             CreateMap<ApplicationRequest, ApplicationDto>();

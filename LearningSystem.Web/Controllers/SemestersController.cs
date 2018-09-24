@@ -3,6 +3,7 @@
     using AutoMapper;
     using LearningSystem.Core.Entities;
     using LearningSystem.Core.Services;
+    using LearningSystem.Web.Helpers;
     using LearningSystem.Web.Models;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -19,13 +20,23 @@
             this.semesterService = semesterService;
         }
 
+        [AuthorizeUserType(UserType.Student)]
         [HttpGet]
         public IActionResult Get()
         {
             var semesters = this.semesterService.GetSemestersWithCourses();
             return Ok(semesters);
         }
-        
+
+        [AuthorizeUserType(UserType.Trainer)]
+        [HttpGet("getAll")]
+        public IActionResult GetAll()
+        {
+            var semesters = this.semesterService.GetAll();
+            return Ok(semesters);
+        }
+
+        [AuthorizeUserType(UserType.Trainer)]
         [HttpGet("get/{id}")]
         public IActionResult Get(int id)
         {
@@ -33,14 +44,7 @@
             return Ok(semesters);
         }
 
-        [HttpGet("getAll")]
-        public IActionResult GetAll()
-        {
-            var semesters = this.semesterService.GetAll();
-            return Ok(semesters);
-        }
-        
-        //[Authorize(Policy = "Trainer")]
+        [AuthorizeUserType(UserType.Trainer)]
         [HttpPost("insert")]
         public IActionResult InsertSeason(SemesterRequest semester)
         {
@@ -49,7 +53,7 @@
             return Ok();
         }
 
-        //[Authorize(Policy = "Trainer")]
+        [AuthorizeUserType(UserType.Trainer)]
         [HttpPut("edit/{id}")]
         public IActionResult EditSeason(SemesterRequest semester)
         {
@@ -58,7 +62,7 @@
             return Ok();
         }
 
-        //[Authorize(Policy = "Trainer")]
+        [AuthorizeUserType(UserType.Trainer)]
         [HttpDelete("delete/{id}")]
         public IActionResult DeleteSeason(int id)
         {

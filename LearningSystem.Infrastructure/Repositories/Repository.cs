@@ -39,6 +39,8 @@
                 throw new ArgumentNullException("entity");
             }
 
+            ((IAuditInfo)entity).CreatedDate = DateTime.Now;
+
             entities.Add(entity);
             context.SaveChanges();
         }
@@ -49,6 +51,11 @@
             {
                 throw new ArgumentNullException("entity");
             }
+
+            var entityDb = this.Get(entity.Id);
+            context.Entry(entityDb).State = EntityState.Detached;
+            ((IAuditInfo)entity).CreatedDate = ((IAuditInfo)entityDb).CreatedDate;
+            ((IAuditInfo)entity).ModifiedDate = DateTime.Now;
 
             context.Entry(entity).State = EntityState.Modified;
             context.SaveChanges();

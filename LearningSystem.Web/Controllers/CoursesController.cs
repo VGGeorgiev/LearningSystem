@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using LearningSystem.Core.Entities;
 using LearningSystem.Core.Services;
+using LearningSystem.Web.Helpers;
 using LearningSystem.Web.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -25,7 +26,8 @@ namespace LearningSystem.Web.Controllers
             var course = this.courseService.GetCourse(id);
             return Ok(course);
         }
-        
+
+        [AuthorizeUserType(UserType.Trainer)]
         [HttpGet("getAll")]
         public IActionResult GetAll()
         {
@@ -33,27 +35,27 @@ namespace LearningSystem.Web.Controllers
             return Ok(courses);
         }
 
-        //[Authorize(Policy = "Trainer")]
+        [AuthorizeUserType(UserType.Trainer)]
         [HttpPost("insert")]
-        public IActionResult InsertSeason(CourseRequest course)
+        public IActionResult Insert(CourseRequest course)
         {
             var courseModel = Mapper.Map<Course>(course);
             this.courseService.Insert(courseModel);
             return Ok();
         }
 
-        //[Authorize(Policy = "Trainer")]
+        [AuthorizeUserType(UserType.Trainer)]
         [HttpPut("edit/{id}")]
-        public IActionResult EditSeason(CourseRequest course)
+        public IActionResult Edit(CourseRequest course)
         {
             var courseModel = Mapper.Map<Course>(course);
             this.courseService.Edit(courseModel);
             return Ok();
         }
 
-        //[Authorize(Policy = "Trainer")]
+        [AuthorizeUserType(UserType.Trainer)]
         [HttpDelete("delete/{id}")]
-        public IActionResult DeleteSeason(int id)
+        public IActionResult Delete(int id)
         {
             this.courseService.Delete(id);
             return Ok();

@@ -94,6 +94,7 @@
             }
         }
 
+        [AuthorizeUserType(UserType.Trainer)]
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -116,7 +117,8 @@
             UserDto user = _userService.GetByUsername(username);
             return Ok(user);
         }
-        
+
+        [AuthorizeUserType(UserType.Trainer)]
         [HttpPut("{id}")]
         public IActionResult Update(int id, [FromBody]UserDto userDto)
         {
@@ -137,6 +139,7 @@
             }
         }
 
+        [AuthorizeUserType(UserType.Trainer)]
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

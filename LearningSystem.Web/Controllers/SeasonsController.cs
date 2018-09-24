@@ -4,6 +4,7 @@
     using LearningSystem.Core.Dtos;
     using LearningSystem.Core.Entities;
     using LearningSystem.Core.Services;
+    using LearningSystem.Web.Helpers;
     using LearningSystem.Web.Models;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -21,20 +22,6 @@
             this.seasonService = seasonService;
         }
 
-        [HttpGet("get/{id}")]
-        public IActionResult Get(int id)
-        {
-            var season = this.seasonService.GetById(id);
-            return Ok(season);
-        }
-
-        [HttpGet("get")]
-        public IActionResult Get()
-        {
-            var seasons = this.seasonService.GetAll();
-            return Ok(seasons);
-        }
-
         [HttpGet("available")]
         public IActionResult GetAvailableSeasons()
         {
@@ -42,7 +29,23 @@
             return Ok(seasons);
         }
 
-        //[Authorize(Policy = "Trainer")]
+        [AuthorizeUserType(UserType.Trainer)]
+        [HttpGet("get/{id}")]
+        public IActionResult Get(int id)
+        {
+            var season = this.seasonService.GetById(id);
+            return Ok(season);
+        }
+
+        [AuthorizeUserType(UserType.Trainer)]
+        [HttpGet("get")]
+        public IActionResult Get()
+        {
+            var seasons = this.seasonService.GetAll();
+            return Ok(seasons);
+        }
+
+        [AuthorizeUserType(UserType.Trainer)]
         [HttpPost("insert")]
         public IActionResult InsertSeason(SeasonRequest season)
         {
@@ -51,7 +54,7 @@
             return Ok();
         }
 
-        //[Authorize(Policy = "Trainer")]
+        [AuthorizeUserType(UserType.Trainer)]
         [HttpPut("edit/{id}")]
         public IActionResult EditSeason(SeasonRequest season)
         {
@@ -60,7 +63,7 @@
             return Ok();
         }
 
-        //[Authorize(Policy = "Trainer")]
+        [AuthorizeUserType(UserType.Trainer)]
         [HttpDelete("delete/{id}")]
         public IActionResult DeleteSeason(int id)
         {
