@@ -1,4 +1,4 @@
-﻿namespace LearningSystem.Core.Services
+﻿namespace LearningSystem.Services.Abstractions
 {
     public interface IHomeworkSubmissionService
     {

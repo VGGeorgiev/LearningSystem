@@ -1,7 +1,7 @@
-﻿using LearningSystem.Core.Dtos;
-
-namespace LearningSystem.Core.Services
+﻿namespace LearningSystem.Services.Abstractions
 {
+    using LearningSystem.Core.Dtos;
+
     public interface IHomeworkEvaluationService
     {
         void EvaluateHomework(HomeworkEvaluationDto homeworkEvaluation);

@@ -1,4 +1,4 @@
-﻿namespace LearningSystem.Core.Services
+﻿namespace LearningSystem.Services.Abstractions
 {
     using LearningSystem.Core.Dtos;
     using LearningSystem.Core.Entities;

@@ -1,9 +1,9 @@
-﻿using LearningSystem.Core.Dtos;
-using LearningSystem.Core.Entities;
-using System.Collections.Generic;
-
-namespace LearningSystem.Core.Services
+﻿namespace LearningSystem.Services.Abstractions
 {
+    using LearningSystem.Core.Dtos;
+    using LearningSystem.Core.Entities;
+    using System.Collections.Generic;
+
     public interface ISemesterService
     {
         IEnumerable<SemesterDto> GetSemestersWithCourses();

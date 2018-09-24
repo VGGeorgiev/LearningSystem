@@ -1,8 +1,8 @@
-﻿using LearningSystem.Core.Dtos;
-using System.Collections.Generic;
-
-namespace LearningSystem.Core.Services
+﻿namespace LearningSystem.Services.Abstractions
 {
+    using LearningSystem.Core.Dtos;
+    using System.Collections.Generic;
+
     public interface IStudentsInCourseService
     {
         void EnrollStudentsInCourse(int courseId, int seasonId);
