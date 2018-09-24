@@ -2,7 +2,7 @@
 {
     using LearningSystem.Core.Entities;
     using LearningSystem.Core.Repositories;
-    using LearningSystem.Core.Services;
+    using LearningSystem.Services.Abstractions;
     using System;
     using System.Linq;
 

@@ -8,7 +8,7 @@ namespace LearningSystem.Infrastructure.Services
     using LearningSystem.Core.Dtos;
     using LearningSystem.Core.Entities;
     using LearningSystem.Core.Repositories;
-    using LearningSystem.Core.Services;
+    using LearningSystem.Services.Abstractions;
 
     public class UserService : IUserService
     {

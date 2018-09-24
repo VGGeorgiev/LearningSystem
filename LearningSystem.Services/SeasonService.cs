@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using AutoMapper;
-using LearningSystem.Core.Entities;
-using LearningSystem.Core.Repositories;
-using LearningSystem.Core.Services;
-using LearningSystem.Core.Dtos;
-
-namespace LearningSystem.Services
+﻿namespace LearningSystem.Services
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using AutoMapper;
+    using LearningSystem.Core.Entities;
+    using LearningSystem.Core.Repositories;
+    using LearningSystem.Core.Dtos;
+    using LearningSystem.Services.Abstractions;
+
     public class SeasonService : ISeasonService
     {
         private IRepository<Season> seasonsRepository;

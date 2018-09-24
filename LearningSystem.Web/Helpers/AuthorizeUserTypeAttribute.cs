@@ -1,11 +1,11 @@
-﻿using LearningSystem.Core.Entities;
-using LearningSystem.Core.Services;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.Extensions.DependencyInjection;
-
-namespace LearningSystem.Web.Helpers
+﻿namespace LearningSystem.Web.Helpers
 {
+    using LearningSystem.Core.Entities;
+    using LearningSystem.Services.Abstractions;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Filters;
+    using Microsoft.Extensions.DependencyInjection;
+
     public class AuthorizeUserTypeAttribute : ActionFilterAttribute
     {
         private UserType userType;

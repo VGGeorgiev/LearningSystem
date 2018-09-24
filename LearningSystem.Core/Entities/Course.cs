@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace LearningSystem.Core.Entities
+﻿namespace LearningSystem.Core.Entities
 {
+    using System.Collections.Generic;
+
     public class Course : AuditInfo, IEntity
     {
         public string Name { get; set; }

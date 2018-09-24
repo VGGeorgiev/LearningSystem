@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace LearningSystem.Web.Models
+﻿namespace LearningSystem.Web.Models
 {
+    using System;
+
     public class SeasonRequest
     {
         public int Id { get; set; }

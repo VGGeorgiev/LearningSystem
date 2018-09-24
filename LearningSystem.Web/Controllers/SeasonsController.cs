@@ -1,14 +1,12 @@
 ﻿namespace LearningSystem.Web.Controllers
 {
     using AutoMapper;
-    using LearningSystem.Core.Dtos;
     using LearningSystem.Core.Entities;
-    using LearningSystem.Core.Services;
+    using LearningSystem.Services.Abstractions;
     using LearningSystem.Web.Helpers;
     using LearningSystem.Web.Models;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using System.Collections.Generic;
 
     [Authorize]
     [ApiController]

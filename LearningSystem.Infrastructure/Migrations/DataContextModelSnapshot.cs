@@ -75,33 +75,6 @@ namespace LearningSystem.Infrastructure.Migrations
                     b.ToTable("Courses");
                 });
 
-            modelBuilder.Entity("LearningSystem.Core.Entities.Feedback", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Content");
-
-                    b.Property<DateTime>("CreatedDate");
-
-                    b.Property<DateTime?>("ModifiedDate");
-
-                    b.Property<short>("Rating");
-
-                    b.Property<int>("ReporterId");
-
-                    b.Property<int>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ReporterId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Feedbacks");
-                });
-
             modelBuilder.Entity("LearningSystem.Core.Entities.HomeworkAssignment", b =>
                 {
                     b.Property<int>("Id")
@@ -311,19 +284,6 @@ namespace LearningSystem.Infrastructure.Migrations
                         .WithMany("Courses")
                         .HasForeignKey("SemesterId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("LearningSystem.Core.Entities.Feedback", b =>
-                {
-                    b.HasOne("LearningSystem.Core.Entities.User", "Reporter")
-                        .WithMany()
-                        .HasForeignKey("ReporterId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("LearningSystem.Core.Entities.User", "User")
-                        .WithMany("Feedbacks")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("LearningSystem.Core.Entities.HomeworkAssignment", b =>

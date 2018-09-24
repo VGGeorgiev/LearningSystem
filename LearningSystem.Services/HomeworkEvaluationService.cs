@@ -1,11 +1,11 @@
-﻿using AutoMapper;
-using LearningSystem.Core.Dtos;
-using LearningSystem.Core.Entities;
-using LearningSystem.Core.Repositories;
-using LearningSystem.Core.Services;
-
-namespace LearningSystem.Services
+﻿namespace LearningSystem.Services
 {
+    using AutoMapper;
+    using LearningSystem.Core.Dtos;
+    using LearningSystem.Core.Entities;
+    using LearningSystem.Core.Repositories;
+    using LearningSystem.Services.Abstractions;
+
     public class HomeworkEvaluationService : IHomeworkEvaluationService
     {
         private IRepository<HomeworkEvaluation> homeworkEvaluationRepository;

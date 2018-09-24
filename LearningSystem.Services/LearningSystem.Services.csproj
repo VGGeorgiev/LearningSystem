@@ -11,6 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\LearningSystem.Common\LearningSystem.Common.csproj" />
     <ProjectReference Include="..\LearningSystem.Core\LearningSystem.Core.csproj" />
+    <ProjectReference Include="..\LearningSystem.Services.Abstractions\LearningSystem.Services.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>

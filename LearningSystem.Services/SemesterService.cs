@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using AutoMapper;
-using LearningSystem.Core.Dtos;
-using LearningSystem.Core.Entities;
-using LearningSystem.Core.Repositories;
-using LearningSystem.Core.Services;
-
-namespace LearningSystem.Services
+﻿namespace LearningSystem.Services
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using AutoMapper;
+    using LearningSystem.Core.Dtos;
+    using LearningSystem.Core.Entities;
+    using LearningSystem.Core.Repositories;
+    using LearningSystem.Services.Abstractions;
+
     public class SemesterService : ISemesterService
     {
         private IRepository<Semester> semesterRepository;

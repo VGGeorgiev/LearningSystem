@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace LearningSystem.Core.Entities
+﻿namespace LearningSystem.Core.Entities
 {
+    using System;
+    using System.Collections.Generic;
+
     public class Season : AuditInfo, IEntity
     {
         public string Name { get; set; }
