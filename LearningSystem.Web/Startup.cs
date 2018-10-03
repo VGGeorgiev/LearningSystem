@@ -19,6 +19,7 @@ namespace LearningSystem.Web
     using LearningSystem.Core.Repositories;
     using Microsoft.AspNetCore.Http;
     using LearningSystem.Services.Abstractions;
+    using Microsoft.AspNetCore.Mvc.Cors.Internal;
 
     public static class AutoMapperExtenssion
     {
@@ -47,7 +48,6 @@ namespace LearningSystem.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors();
             services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddHttpContextAccessor();
@@ -125,13 +125,6 @@ namespace LearningSystem.Web
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
             
-            // global cors policy
-            app.UseCors(x => x
-                .AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader()
-                .AllowCredentials());
-
             app.UseAuthentication();
             
             app.UseMvc(routes =>

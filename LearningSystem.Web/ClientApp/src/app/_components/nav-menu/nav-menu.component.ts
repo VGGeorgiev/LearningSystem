@@ -34,6 +34,10 @@ export class NavMenuComponent {
     return this.authenticationService.isLoggedIn();
   }
 
+  isStudent() {
+    return this.currentUser.type == UserType.Student;
+  }
+
   isTrainer() {
     return this.currentUser.type == UserType.Trainer;
   }

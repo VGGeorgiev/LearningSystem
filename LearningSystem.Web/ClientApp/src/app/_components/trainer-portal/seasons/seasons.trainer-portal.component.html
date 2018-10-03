@@ -18,7 +18,7 @@
         <tr *ngFor="let season of seasons">
           <th scope="row">{{season.id}}</th>
           <td>{{season.name}}</td>
-          <td>{{season.startDate}}</td>
+          <td>{{season.startDate | date}}</td>
           <td>{{season.studentsLimit}}</td>
           <td><a routerLink="/trainer-portal/seasons-edit/{{season.id}}">Edit</a></td>
           <td><a href="javascript:void(0)" (click)="deleteSeason(season.id)">Delete</a></td>

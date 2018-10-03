@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuthenticationService, UserService } from '../../_services';
-import { User, UserInCourse } from '../../_models';
+import { User, UserInCourse, UserType } from '../../_models';
 import { AlertsService } from 'angular-alert-module';
 
 @Component({
@@ -24,17 +24,18 @@ export class ProfileComponent {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.username = params['username'];
+      var loggedUserUsername = this.authenticationService.getCurrentUser().username;
       if (!this.username) {
-        this.username = this.authenticationService.getCurrentUser().username;
+        this.username = loggedUserUsername;
       }
 
-      if (this.username == this.authenticationService.getCurrentUser().username) {
+      if (this.username == loggedUserUsername) {
         this.isMyProfile = true;
       }
 
       this.userService.getByUsername(this.username).subscribe(data => {
         this.user = data;
-
+        
         this.userService.getUserInCourses(this.user.id).subscribe(data => {
           this.userInCourses = data;
         });

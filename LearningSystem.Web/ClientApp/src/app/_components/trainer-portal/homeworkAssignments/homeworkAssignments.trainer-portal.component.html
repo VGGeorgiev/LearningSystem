@@ -18,7 +18,7 @@
         <tr *ngFor="let homeworkAssignment of homeworkAssignments">
           <th scope="row">{{homeworkAssignment.id}}</th>
           <td>{{homeworkAssignment.content}}</td>
-          <td>{{homeworkAssignment.deadline}}</td>
+          <td>{{homeworkAssignment.deadline | date: 'medium'}}</td>
           <td>{{homeworkAssignment.lectureName}}</td>
           <td><a routerLink="/trainer-portal/homework-assignments-edit/{{homeworkAssignment.id}}">Edit</a></td>
           <td><a href="javascript:void(0)" (click)="deleteHomeworkAssignment(homeworkAssignment.id)">Delete</a></td>

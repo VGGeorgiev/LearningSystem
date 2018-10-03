@@ -8,7 +8,6 @@
     using Microsoft.AspNetCore.Mvc;
 
     [Authorize]
-    [AuthorizeUserType(UserType.Trainer)]
     [ApiController]
     [Route("api/[controller]")]
     public class StudentsInCourseController : ControllerBase
@@ -21,6 +20,7 @@
         }
         
         [HttpPost("enroll")]
+        [AuthorizeUserType(UserType.Trainer)]
         public IActionResult EnrollStudentsInCourse(EnrollStudentsInCourseRequest model)
         {
             this.studentsInCourseService.EnrollStudentsInCourse(model.CourseId, model.SeasonId);
@@ -35,6 +35,7 @@
         }
         
         [HttpPost("changeGrade")]
+        [AuthorizeUserType(UserType.Trainer)]
         public IActionResult ChangeGrade(ChangeGradeRequest model)
         {
             this.studentsInCourseService.ChangeGrade(model.Id, model.Grade);

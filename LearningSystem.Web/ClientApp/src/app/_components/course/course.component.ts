@@ -8,7 +8,6 @@ import { CourseDetail } from '../../_models';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { homedir } from 'os';
 import { HomeworkAssignment } from '../../_models/homeworkAssignment';
 import { AlertsService } from 'angular-alert-module';
 

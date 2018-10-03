@@ -17,7 +17,7 @@
                 <span class='glyphicon glyphicon-home'></span> Home
               </a>
             </li>
-            <li *ngIf="isLoggedIn()" [routerLinkActive]='["link-active"]'>
+            <li *ngIf="(isLoggedIn() && isStudent()) || (isLoggedIn() && isTrainer())" [routerLinkActive]='["link-active"]'>
               <a [routerLink]='["/courses"]'>
                 <span class='glyphicon glyphicon-list-alt'></span> Courses
               </a>
@@ -29,7 +29,7 @@
             </li>
             <li *ngIf="isLoggedIn() && isTrainer()" [routerLinkActive]='["link-active"]'>
               <a [routerLink]='["/trainer-portal/"]'>
-                <span class='glyphicon glyphicon-user'></span> Trainer Portal
+                <span class='glyphicon glyphicon-education'></span> Trainer Portal
               </a>
             </li>
             <li *ngIf="isLoggedIn()" [routerLinkActive]='["link-active"]'>

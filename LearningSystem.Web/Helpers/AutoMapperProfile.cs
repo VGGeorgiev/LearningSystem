@@ -30,8 +30,7 @@ namespace LearningSystem.Web.Helpers
             CreateMap<Application, ApplicationDto>();
             CreateMap<Course, CourseDetailDto>();
             CreateMap<HomeworkAssignment, HomeworkAssignmentDto>()
-                .ForMember(x => x.HasUserSubmission, x => x.MapFrom(m => m.HomeworkSubmissions
-                .Any(hs => hs.UserId == int.Parse(httpContextAccessor.HttpContext.User.Identity.Name))));
+                .ForMember(x => x.HasUserSubmission, x => x.MapFrom(m => true));
             
             CreateMap<Lecture, LectureDto>();
             CreateMap<ApplicationRequest, ApplicationDto>();

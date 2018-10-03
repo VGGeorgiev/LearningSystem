@@ -26,8 +26,7 @@
             var seasons = this.seasonService.GetAvailableSeasons();
             return Ok(seasons);
         }
-
-        [AuthorizeUserType(UserType.Trainer)]
+        
         [HttpGet("get/{id}")]
         public IActionResult Get(int id)
         {

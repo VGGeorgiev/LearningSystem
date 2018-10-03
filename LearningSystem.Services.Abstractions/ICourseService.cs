@@ -6,7 +6,7 @@
 
     public interface ICourseService
     {
-        CourseDetailDto GetCourse(int id);
+        CourseDetailDto GetCourse(int id, int userId);
 
         IEnumerable<CourseWithSemesterDto> GetAll();
 
